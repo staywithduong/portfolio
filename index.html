@@ -55,7 +55,7 @@ function draw() {
 
   var div = document.createElement("div");
   div.className = "bird";
-  div.style.left = bird.x + "px";
+  div.style.left = String(bird.x) + "px";
   div.style.top = bird.y + "px";
   game.appendChild(div);
 }
