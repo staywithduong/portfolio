@@ -18,8 +18,8 @@ function play() {
   var userChoice = prompt("Chọn búa, bao, kéo: ");
 
   document.getElementById("result").innerHTML = `
-    <p>Computer chose: ${computerChoice}</p>
-    <p>You chose: ${userChoice}</p>
+    <p>Dương chọn: ${computerChoice}</p>
+    <p>Bạn chọn: ${userChoice}</p>
   `;
 
   if (computerChoice === userChoice) {
@@ -28,15 +28,15 @@ function play() {
     `;
   } else if (computerChoice === "búa" && userChoice === "kéo") {
     document.getElementById("result").innerHTML += `
-      <p>Bạn thua!</p>
+      <p>Dương thắng!</p>
     `;
   } else if (computerChoice === "kéo" && userChoice === "bao") {
     document.getElementById("result").innerHTML += `
-      <p>Bạn thua!</p>
+      <p>Dương thắng!</p>
     `;
   } else if (computerChoice === "bao" && userChoice === "búa") {
     document.getElementById("result").innerHTML += `
-      <p>Bạn thua!</p>
+      <p>Dương thắng!</p>
     `;
   } else {
     document.getElementById("result").innerHTML += `
