@@ -1,93 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Flappy Bird</title>
-<style>
-body {
-  background-color: black;
-}
-
-#game {
-  width: 400px;
-  height: 400px;
-  border: 1px solid black;
-}
-
-.bird {
-  fill: green;
-  stroke: black;
-  stroke-width: 1px;
-  width: 10px;
-  height: 10px;
-}
-
-.pipe {
-  fill: white;
-  stroke: black;
-  stroke-width: 1px;
-  width: 100px;
-  height: 10px;
-}
-</style>
+<title>Rock Paper Scissors</title>
 </head>
 <body>
-<div id="game"></div>
+
+<h1>Rock Paper Scissors</h1>
+
+<input type="button" value="Play" onclick="play()">
+
+<div id="result"></div>
+
 <script>
-var game = document.getElementById("game");
-var bird = {
-  x: 200,
-  y: 200,
-  dir: 0
-};
-var pipes = [];
+function play() {
+  var choices = ["rock", "paper", "scissors"];
+  var computerChoice = choices[Math.floor(Math.random() * choices.length)];
+  var userChoice = prompt("Choose rock, paper, or scissors: ");
 
-function draw() {
-  game.innerHTML = "";
+  document.getElementById("result").innerHTML = `
+    <p>Computer chose: ${computerChoice}</p>
+    <p>You chose: ${userChoice}</p>
+  `;
 
-  for (var i = 0; i < pipes.length; i++) {
-    var pipe = pipes[i];
-    var div = document.createElement("div");
-    div.className = "pipe";
-    div.style.left = pipe.x + "px";
-    div.style.top = pipe.y + "px";
-    game.appendChild(div);
-  }
-
-  var div = document.createElement("div");
-  div.className = "bird";
-  div.style.left = String(bird.x) + "px";
-  div.style.top = bird.y + "px";
-  game.appendChild(div);
-}
-
-function update() {
-  bird.x += bird.dir * 10;
-
-  if (bird.x < 0 || bird.x >= game.width) {
-    alert("Game over!");
-    return;
-  }
-
-  var pipe = pipes.shift();
-  if (pipe) {
-    if (pipe.y < 0) {
-      pipes.push(pipe);
-    } else if (bird.y + 10 < pipe.y) {
-      alert("Game over!");
-      return;
-    }
+  if (computerChoice === userChoice) {
+    document.getElementById("result").innerHTML += `
+      <p>Tie!</p>
+    `;
+  } else if (computerChoice === "rock" && userChoice === "scissors") {
+    document.getElementById("result").innerHTML += `
+      <p>Computer wins!</p>
+    `;
+  } else if (computerChoice === "scissors" && userChoice === "paper") {
+    document.getElementById("result").innerHTML += `
+      <p>Computer wins!</p>
+    `;
+  } else if (computerChoice === "paper" && userChoice === "rock") {
+    document.getElementById("result").innerHTML += `
+      <p>Computer wins!</p>
+    `;
   } else {
-    pipe = {
-      x: Math.random() * game.width,
-      y: -100
-    };
-    pipes.push(pipe);
+    document.getElementById("result").innerHTML += `
+      <p>You win!</p>
+    `;
   }
-
-  draw();
 }
-
-var timer = setInterval(update, 100);
 </script>
+
 </body>
 </html>
