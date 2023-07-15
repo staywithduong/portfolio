@@ -1,107 +1,93 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Snake Game</title>
+<title>Flappy Bird</title>
 <style>
 body {
   background-color: black;
 }
 
-#board {
+#game {
   width: 400px;
   height: 400px;
   border: 1px solid black;
 }
 
-.snake {
+.bird {
   fill: green;
   stroke: black;
   stroke-width: 1px;
+  width: 10px;
+  height: 10px;
 }
 
-.food {
-  fill: red;
+.pipe {
+  fill: white;
   stroke: black;
   stroke-width: 1px;
+  width: 100px;
+  height: 10px;
 }
 </style>
 </head>
 <body>
-<div id="board"></div>
+<div id="game"></div>
 <script>
-var board = document.getElementById("board");
-var snake = [];
-var food = {
+var game = document.getElementById("game");
+var bird = {
   x: 200,
-  y: 200
+  y: 200,
+  dir: 0
 };
+var pipes = [];
 
 function draw() {
-  board.innerHTML = "";
-  for (var i = 0; i < snake.length; i++) {
+  game.innerHTML = "";
+
+  for (var i = 0; i < pipes.length; i++) {
+    var pipe = pipes[i];
     var div = document.createElement("div");
-    div.className = "snake";
-    div.style.left = snake[i].x + "px";
-    div.style.top = snake[i].y + "px";
-    board.appendChild(div);
+    div.className = "pipe";
+    div.style.left = pipe.x + "px";
+    div.style.top = pipe.y + "px";
+    game.appendChild(div);
   }
 
   var div = document.createElement("div");
-  div.className = "food";
-  div.style.left = food.x + "px";
-  div.style.top = food.y + "px";
-  board.appendChild(div);
+  div.className = "bird";
+  div.style.left = bird.x + "px";
+  div.style.top = bird.y + "px";
+  game.appendChild(div);
 }
 
 function update() {
-  var head = snake[0];
-  var dir = head.dir;
+  bird.x += bird.dir * 10;
 
-  var newX = head.x + dir.x;
-  var newY = head.y + dir.y;
-
-  if (newX < 0 || newX >= board.width || newY < 0 || newY >= board.height) {
+  if (bird.x < 0 || bird.x >= game.width) {
     alert("Game over!");
     return;
   }
 
-  if (snake.indexOf({x: newX, y: newY}) !== -1) {
-    alert("Game over!");
-    return;
+  var pipe = pipes.shift();
+  if (pipe) {
+    if (pipe.y < 0) {
+      pipes.push(pipe);
+    } else if (bird.y + 10 < pipe.y) {
+      alert("Game over!");
+      return;
+    }
+  } else {
+    pipe = {
+      x: Math.random() * game.width,
+      y: -100
+    };
+    pipes.push(pipe);
   }
-
-  snake.unshift({x: newX, y: newY, dir: dir});
-  snake.pop();
 
   draw();
 }
 
 var timer = setInterval(update, 100);
-
-document.addEventListener("keydown", function(event) {
-  var dir = {
-    x: 0,
-    y: 0
-  };
-
-  switch (event.keyCode) {
-    case 38: // up
-      dir.y = -1;
-      break;
-    case 40: // down
-      dir.y = 1;
-      break;
-    case 37: // left
-      dir.x = -1;
-      break;
-    case 39: // right
-      dir.x = 1;
-      break;
-  }
-
-  snake[0].dir = dir;
-});
 </script>
 </body>
-  </html>
-  
+</html>
