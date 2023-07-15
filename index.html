@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Rock Paper Scissors</title>
+<title>Game</title>
 </head>
 <body>
 
-<h1>Rock Paper Scissors</h1>
+<h1>Kéo Búa Bao</h1>
 
-<input type="button" value="Play" onclick="play()">
+<input type="button" value="Chơi" onclick="play()">
 
 <div id="result"></div>
 
 <script>
 function play() {
-  var choices = ["rock", "paper", "scissors"];
+  var choices = ["búa", "bao", "kéo"];
   var computerChoice = choices[Math.floor(Math.random() * choices.length)];
-  var userChoice = prompt("Choose rock, paper, or scissors: ");
+  var userChoice = prompt("Chọn búa, bao, kéo: ");
 
   document.getElementById("result").innerHTML = `
     <p>Computer chose: ${computerChoice}</p>
@@ -24,23 +24,23 @@ function play() {
 
   if (computerChoice === userChoice) {
     document.getElementById("result").innerHTML += `
-      <p>Tie!</p>
+      <p>Hoà!</p>
     `;
-  } else if (computerChoice === "rock" && userChoice === "scissors") {
+  } else if (computerChoice === "búa" && userChoice === "kéo") {
     document.getElementById("result").innerHTML += `
-      <p>Computer wins!</p>
+      <p>Bạn thua!</p>
     `;
-  } else if (computerChoice === "scissors" && userChoice === "paper") {
+  } else if (computerChoice === "kéo" && userChoice === "bao") {
     document.getElementById("result").innerHTML += `
-      <p>Computer wins!</p>
+      <p>Bạn thua!</p>
     `;
-  } else if (computerChoice === "paper" && userChoice === "rock") {
+  } else if (computerChoice === "bao" && userChoice === "búa") {
     document.getElementById("result").innerHTML += `
-      <p>Computer wins!</p>
+      <p>Bạn thua!</p>
     `;
   } else {
     document.getElementById("result").innerHTML += `
-      <p>You win!</p>
+      <p>Bạn thắng!</p>
     `;
   }
 }
