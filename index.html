@@ -1,51 +1,10 @@
-<link rel="stylesheet" href="style.css">
 <!DOCTYPE html>
 <html>
 <head>
-<title>Game</title>
+  <title>Never Give Up</title>
+  <meta http-equiv="refresh" content="0; url=https://youtu.be/dQw4w9WgXcQ" />
 </head>
 <body>
-
-<h1>Kéo Búa Bao</h1>
-  
-<input type="button" value="Chơi" style="margin: 0 auto;" onclick="play()">
- 
-<div id="result"></div>
-
-<script>
-function play() {
-  var choices = ["búa", "bao", "kéo"];
-  var computerChoice = choices[Math.floor(Math.random() * choices.length)];
-  var userChoice = prompt("Chọn búa, bao, kéo: ");
-
-  document.getElementById("result").innerHTML = `
-    <p>Dương chọn: ${computerChoice}</p>
-    <p>Bạn chọn: ${userChoice}</p>
-  `;
-
-  if (computerChoice === userChoice) {
-    document.getElementById("result").innerHTML += `
-      <p>Hoà!</p>
-    `;
-  } else if (computerChoice === "búa" && userChoice === "kéo") {
-    document.getElementById("result").innerHTML += `
-      <p>Dương thắng!</p>
-    `;
-  } else if (computerChoice === "kéo" && userChoice === "bao") {
-    document.getElementById("result").innerHTML += `
-      <p>Dương thắng!</p>
-    `;
-  } else if (computerChoice === "bao" && userChoice === "búa") {
-    document.getElementById("result").innerHTML += `
-      <p>Dương thắng!</p>
-    `;
-  } else {
-    document.getElementById("result").innerHTML += `
-      <p>Bạn thắng!</p>
-    `;
-  }
-}
-</script>
 
 </body>
 </html>
